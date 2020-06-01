@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:recorder/services/location.dart';
+import 'package:recorder/views/gps_logger.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,18 +35,12 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var location = Provider.of<LocationData>(context);
-
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '$location.toString()',
-            ),
-          ],
+        child: Container(
+          margin: const EdgeInsets.only(top: 20),
+            child: GPSLogger()
         ),
       ),
     );

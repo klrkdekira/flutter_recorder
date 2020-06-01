@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:location/location.dart';
 
 class LocationService {
@@ -7,7 +6,9 @@ class LocationService {
     _location.requestPermission().then((granted) {
       if (granted == PermissionStatus.granted) {
         _location.onLocationChanged.listen((locationData) {
-          _locationController.add(locationData);
+          if (locationData != null) {
+            _locationController.add(locationData);
+          }
         });
       }
     });
@@ -19,8 +20,7 @@ class LocationService {
 
   Future<LocationData> getLocation() async {
     try {
-      var here = await _location.getLocation();
-      _here = here;
+      _here = await _location.getLocation();
     } on Exception catch (e) {
       print('unable to get location: ${e.toString()}');
     }
